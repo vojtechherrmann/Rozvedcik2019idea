@@ -112,10 +112,10 @@ for (team_id in TeamIds) {
   
   team_points[1:nr_players,"symbol"] = common_symbols$symbol
   team_points[1:nr_players,"color"] = common_symbols$color
-  team_points[(nr_players+2):(nr_players+6),"symbol"] = common_symbols$symbol[1:5]
-  team_points[(nr_players+2):(nr_players+6),"color"] = common_symbols$color[1:5]
-  team_points[(nr_players+1),"symbol"] = common_symbols$symbol[6]
-  team_points[(nr_players+1),"color"] = common_symbols$color[6]
+  team_points[(nr_players+2):(2*nr_players),"symbol"] = common_symbols$symbol[1:(nr_players-1)]
+  team_points[(nr_players+2):(2*nr_players),"color"] = common_symbols$color[1:(nr_players-1)]
+  team_points[(nr_players+1),"symbol"] = common_symbols$symbol[nr_players]
+  team_points[(nr_players+1),"color"] = common_symbols$color[nr_players]
   
   eigen_symbols <- db[(used_symbols+nr_players+1):(used_symbols+(nr_players*(1+nr_redundant_symbols))),]
   
