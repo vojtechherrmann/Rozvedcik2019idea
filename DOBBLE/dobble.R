@@ -4,8 +4,6 @@ library(stringi)
 
 
 ### DECLARE PARAMS ##############
-nr_teams = 5
-nr_players = 6
 nr_redundant_symbols = 4
 black_n_white = FALSE
 ### DECLARE PARAMS ##############
@@ -38,6 +36,10 @@ teams <- read.csv("DOBBLE/teams.csv", encoding = "UTF-8", stringsAsFactors = FAL
   left_join(categories, by = "CategoryInternalName") %>%
   select(TeamId, CategoryExternalName) %>%
   arrange(TeamId)
+
+nr_teams = teams %>% pull(TeamId) %>% unique() %>% length()
+nr_players = (nrow(guests_public)) %/% nr_teams
+if (((nrow(guests_public)) %% nr_teams)>0) { nr_players = nr_players + 1 }
 
 # set of guests - Name, CategoryId
 guests_public <- guests_secret %>%
@@ -93,7 +95,6 @@ makePlot <- function(dfToPlot, main, team_order, member_order, nr_to_display, bl
   dev.off()
   
 }
-
 
 db <- data.frame(
   symbol = rep(symbols, length(colors)),
