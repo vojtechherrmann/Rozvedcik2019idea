@@ -1,11 +1,13 @@
 library(dplyr)
 library(reshape2)
+library(stringi)
 
 
 ### DECLARE PARAMS ##############
 nr_teams = 5
 nr_players = 6
 nr_redundant_symbols = 4
+black_n_white = FALSE
 ### DECLARE PARAMS ##############
 
 
@@ -53,7 +55,7 @@ symbols = c(
   "265D", "265F", "26AB", "0024", "00A3", "25A0"
 )
 
-makePlot <- function(dfToPlot, main, team_order, member_order, nr_to_display) {
+makePlot <- function(dfToPlot, main, team_order, member_order, nr_to_display, black_n_white) {
   
   dfToPlot_inner = dfToPlot[sample(nrow(dfToPlot)),]
   
@@ -77,6 +79,17 @@ makePlot <- function(dfToPlot, main, team_order, member_order, nr_to_display) {
     pch = stri_unescape_unicode(gsub("\\U","\\u", paste0("\\U", dfToPlot_inner$symbol), fixed=TRUE)),
     xaxt='n', yaxt='n', frame.plot=FALSE, xlab = "", ylab = ""
   )
+  if (black_n_white) {
+    points(
+      pch = substr(dfToPlot_inner$color, 1, 1),
+      0.3+dfToPlot_inner$x,dfToPlot_inner$y,
+      main = main,
+      xlim = c(0.5, wide+0.5),
+      ylim = c(0.5, long+0.5),
+      cex = 2, 
+      xaxt='n', yaxt='n', xlab = "", ylab = ""
+    )
+  }
   dev.off()
   
 }
@@ -128,7 +141,8 @@ for (team_id in TeamIds) {
       TeamMember,
       team_order,
       member_order,
-      tournamentmember_randomnumbers[tournamentmember_order]
+      tournamentmember_randomnumbers[tournamentmember_order],
+      black_n_white
     )
     
     member_order = member_order + 1
