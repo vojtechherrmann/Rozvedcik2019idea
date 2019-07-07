@@ -1,0 +1,6 @@
+TeamId,CategoryId1,CategoryId2,CategoryId3,CategoryId4,CategoryId5,CategoryId6
+1,MA,ZA1,ZB,MB,MC,MD
+2,MA,ZA1,ZB,MB,MC,MD
+3,MA1,ZA,ZB2,MB,MC,MD
+4,MA1,ZA,ZB2,Vlasta,MC,MD
+5,MA,Simca,ZB,MB,MC,MD
