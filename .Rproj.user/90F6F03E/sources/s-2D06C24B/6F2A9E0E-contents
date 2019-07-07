@@ -53,7 +53,7 @@ symbols = c(
   "265D", "265F", "26AB", "0024", "00A3", "25A0"
 )
 
-makePlot <- function(dfToPlot, main, team_order, member_order, tournamentmember_order) {
+makePlot <- function(dfToPlot, main, team_order, member_order, nr_to_display) {
   
   dfToPlot_inner = dfToPlot[sample(nrow(dfToPlot)),]
   
@@ -66,8 +66,7 @@ makePlot <- function(dfToPlot, main, team_order, member_order, tournamentmember_
   dfToPlot_inner$y = rep(seq(long), each = wide)[1:n]
   
   #png(paste0("DOBBLE/pics/", team_order, "_", member_order, "_", main, ".png"))
-  png(paste0("DOBBLE/pics/", tournamentmember_order, "_", main, ".png"))
-  tournamentmember_order
+  png(paste0("DOBBLE/pics/", nr_to_display, "_", main, ".png"))
   plot(
     dfToPlot_inner$x,dfToPlot_inner$y,
     main = main,
